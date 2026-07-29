@@ -16,4 +16,4 @@ jobs:
    - name: Run API Tests
      run: |
        newman run Collections/Desafio Carrefour.postman_collection.json \
-         -e Environment/ServeRest_env.postman_environment.json 
+         -e Environment/ServeRest_env.postman_environment.json
