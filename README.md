@@ -90,7 +90,7 @@ npm install -g newman
 ## Clonar o projeto
 
 ```bash
-git clone SEU_LINK_DO_REPOSITORIO
+git clone https://github.com/MarcoQAestudos/Desafio-Carrefour-Teste-API
 ```
 
 Entrar na pasta:
