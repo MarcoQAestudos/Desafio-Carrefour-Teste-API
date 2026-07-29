@@ -17,12 +17,4 @@ jobs:
  run: |
  newman run Collections/Desafio Carrefour.postman_collection.json \
  -e Environment/ServeRest_env.postman_environment.j
-son \
- -r cli,junit \
- --reporter-junit-export resultado.xml
- - name: Upload test report
- if: always()
- uses: actions/upload-artifact@v4
- with:
- name: relatorio-testes
- path: resultado.xml
+son 
