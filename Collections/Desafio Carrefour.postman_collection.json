@@ -1,0 +1,321 @@
+{
+  "info": {
+    "_postman_id": "ed2febdd-9248-4a71-aca2-9306e9403cf6",
+    "name": "Desafio Carrefour",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18543620"
+  },
+  "item": [
+    {
+      "name": "ServeRest",
+      "item": [
+        {
+          "name": "Login",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const resposta = pm.response.json();\r",
+                      "pm.environment.set(\"token\", resposta.authorization);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"marco@email.com\",\r\n    \"password\": \"teste\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://serverest.dev/login",
+                  "protocol": "https",
+                  "host": [
+                    "serverest",
+                    "dev"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "usuários",
+          "item": [
+            {
+              "name": "Cadastrar Usuários",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const resposta = pm.response.json();\r",
+                      "pm.environment.set(\"id_usuario_cadastrado\", resposta._id);\r",
+                      "\r",
+                      "pm.test(\"Status code é 200 - Usuário rciado com sucesso\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Body contem _id\", function (){\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta).to.have.property(\"_id\");\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Resposta em menos de 1000ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Mensagem Confirmação cadastro\", function () {\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta.message).to.equal(\"Cadastro realizado com sucesso\");\r",
+                      "});\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nome\": \"Marco Aurélio \",\r\n    \"email\": \"marcouiytr45@email.com\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/usuarios",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Listar todos os usuários",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code é 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Contem Lista de Usuário\", function () {\r",
+                      "    const resposta = pm.response.json();\r",
+                      "    pm.expect(resposta).to.have.property(\"usuarios\");\r",
+                      "    pm.expect(resposta.usuarios).to.be.an(\"array\")\r",
+                      "});\r",
+                      "\r",
+                      "\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/usuarios",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Buscar usuário  Específico Pelo id",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code é 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/usuarios/{{id_usuario_cadastrado}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{id_usuario_cadastrado}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Alterar usuário",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"Marco Aurélio \",\n    \"email\": \"marcouiytr46@email.com\",\n    \"password\": \"teste\",\n    \"administrador\": \"true\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/usuarios/{{id_usuario_cadastrado}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{id_usuario_cadastrado}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Deletar Usuário da Base",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code é 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/usuarios/{{id_usuario_cadastrado}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{id_usuario_cadastrado}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
