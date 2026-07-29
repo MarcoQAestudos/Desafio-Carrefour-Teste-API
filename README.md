@@ -172,7 +172,7 @@ O GitHub executará todos os testes automaticamente.
 2. Clone o projeto:
 
 ```bash
-git clone SEU_LINK_DO_REPOSITORIO
+git clone https://github.com/MarcoQAestudos/Desafio-Carrefour-Teste-API
 ```
 
 3. Entre na pasta:
